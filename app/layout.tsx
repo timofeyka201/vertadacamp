@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "VertadaCamp — кэмперы-прицепы | Твоя свобода путешествовать",
   description:
     "VertadaCamp — производитель кэмперов-прицепов. Эконом, Базовая и Комфорт комплектации. Надёжная конструкция, продуманная эргономика, уют в дороге.",
+  verification: {
+    yandex: "ee6f0c1f0d732a3f",
+  },
 };
 
 export default function RootLayout({
