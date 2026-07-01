@@ -1,69 +1,63 @@
-import { get, put } from "@vercel/blob";
+import { del, get, list, put } from "@vercel/blob";
 import type { Application } from "./types";
 
-const PATHNAME = "applications.json";
+const PREFIX = "applications/";
 
-// Serializes writes so concurrent requests within the same instance don't clobber the blob.
-let writeChain: Promise<unknown> = Promise.resolve();
+function pathnameFor(id: string): string {
+  return `${PREFIX}${id}.json`;
+}
 
-export async function readApplications(): Promise<Application[]> {
+async function readOne(pathname: string): Promise<Application | null> {
   try {
-    const result = await get(PATHNAME, { access: "private" });
-    if (!result || result.statusCode !== 200) return [];
+    const result = await get(pathname, { access: "private" });
+    if (!result || result.statusCode !== 200) return null;
     const raw = await new Response(result.stream).text();
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    return JSON.parse(raw) as Application;
   } catch {
-    return [];
+    return null;
   }
 }
 
-async function writeApplications(apps: Application[]): Promise<void> {
-  await put(PATHNAME, JSON.stringify(apps, null, 2), {
-    access: "private",
-    contentType: "application/json",
-    allowOverwrite: true,
-    cacheControlMaxAge: 0,
-  });
+export async function readApplications(): Promise<Application[]> {
+  const { blobs } = await list({ prefix: PREFIX });
+  const apps = await Promise.all(blobs.map((b) => readOne(b.pathname)));
+  return apps
+    .filter((a): a is Application => a !== null)
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
 
-function withWriteLock<T>(fn: () => Promise<T>): Promise<T> {
-  const result = writeChain.then(fn, fn);
-  writeChain = result.catch(() => undefined);
-  return result;
-}
-
+// Each application gets its own blob (named by id), so a new submission
+// never overwrites another one's data.
 export async function addApplication(
   app: Application
 ): Promise<Application> {
-  return withWriteLock(async () => {
-    const apps = await readApplications();
-    apps.unshift(app);
-    await writeApplications(apps);
-    return app;
+  await put(pathnameFor(app.id), JSON.stringify(app), {
+    access: "private",
+    contentType: "application/json",
   });
+  return app;
 }
 
 export async function updateApplicationStatus(
   id: string,
   status: Application["status"]
 ): Promise<Application | null> {
-  return withWriteLock(async () => {
-    const apps = await readApplications();
-    const idx = apps.findIndex((a) => a.id === id);
-    if (idx === -1) return null;
-    apps[idx] = { ...apps[idx], status };
-    await writeApplications(apps);
-    return apps[idx];
+  const pathname = pathnameFor(id);
+  const app = await readOne(pathname);
+  if (!app) return null;
+  const updated: Application = { ...app, status };
+  await put(pathname, JSON.stringify(updated), {
+    access: "private",
+    contentType: "application/json",
+    allowOverwrite: true,
   });
+  return updated;
 }
 
 export async function deleteApplication(id: string): Promise<boolean> {
-  return withWriteLock(async () => {
-    const apps = await readApplications();
-    const next = apps.filter((a) => a.id !== id);
-    if (next.length === apps.length) return false;
-    await writeApplications(next);
-    return true;
-  });
+  const pathname = pathnameFor(id);
+  const app = await readOne(pathname);
+  if (!app) return false;
+  await del(pathname);
+  return true;
 }
