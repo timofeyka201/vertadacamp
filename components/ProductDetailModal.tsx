@@ -27,7 +27,7 @@ export default function ProductDetailModal() {
           <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl2">
             <Image
               src={product.gallery[activeImg] ?? product.image}
-              alt={product.name}
+              alt={`Кэмпер-прицеп VertadaCamp ${product.name} — ${product.tagline}`}
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 500px"

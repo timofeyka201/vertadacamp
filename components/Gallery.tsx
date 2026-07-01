@@ -32,7 +32,7 @@ export default function Gallery() {
             >
               <Image
                 src={item.src}
-                alt={item.title}
+                alt={`${item.title} — кэмпер-прицеп VertadaCamp`}
                 fill
                 className="object-cover transition duration-500 group-hover:scale-110"
                 sizes="(max-width: 768px) 50vw, 25vw"

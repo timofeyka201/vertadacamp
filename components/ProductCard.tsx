@@ -23,7 +23,7 @@ export default function ProductCard({ product }: { product: Product }) {
       <div className="relative aspect-[4/3] w-full overflow-hidden">
         <Image
           src={product.image}
-          alt={product.name}
+          alt={`Кэмпер-прицеп VertadaCamp ${product.name} — ${product.tagline}`}
           fill
           className="object-cover transition duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 33vw"
