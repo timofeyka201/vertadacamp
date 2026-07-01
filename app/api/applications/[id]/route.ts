@@ -3,6 +3,10 @@ import { deleteApplication, updateApplicationStatus } from "@/lib/storage";
 import { ADMIN_COOKIE_NAME, isValidSessionToken } from "@/lib/auth";
 import type { ApplicationStatus } from "@/lib/types";
 
+// Blob reads/writes go through fetch(); force-dynamic keeps Next.js from
+// caching that fetch and serving stale application data.
+export const dynamic = "force-dynamic";
+
 const VALID_STATUSES: ApplicationStatus[] = ["new", "in_progress", "done"];
 
 function requireAdmin(req: NextRequest): boolean {

@@ -23,6 +23,7 @@ async function writeApplications(apps: Application[]): Promise<void> {
     access: "private",
     contentType: "application/json",
     allowOverwrite: true,
+    cacheControlMaxAge: 0,
   });
 }
 

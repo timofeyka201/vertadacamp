@@ -4,6 +4,10 @@ import { addApplication, readApplications } from "@/lib/storage";
 import { ADMIN_COOKIE_NAME, isValidSessionToken } from "@/lib/auth";
 import type { Application, CamperModel } from "@/lib/types";
 
+// Blob reads/writes go through fetch(); force-dynamic keeps Next.js from
+// caching that fetch and serving stale application data.
+export const dynamic = "force-dynamic";
+
 const VALID_MODELS: (CamperModel | "")[] = ["econom", "base", "comfort", ""];
 
 export async function GET(req: NextRequest) {
