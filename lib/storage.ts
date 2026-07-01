@@ -1,26 +1,16 @@
-import { promises as fs } from "fs";
-import path from "path";
+import { get, put } from "@vercel/blob";
 import type { Application } from "./types";
 
-const DATA_DIR = path.join(process.cwd(), "data");
-const DATA_FILE = path.join(DATA_DIR, "applications.json");
+const PATHNAME = "applications.json";
 
-// Serializes writes so concurrent requests don't clobber the file.
+// Serializes writes so concurrent requests within the same instance don't clobber the blob.
 let writeChain: Promise<unknown> = Promise.resolve();
 
-async function ensureFile(): Promise<void> {
-  await fs.mkdir(DATA_DIR, { recursive: true });
-  try {
-    await fs.access(DATA_FILE);
-  } catch {
-    await fs.writeFile(DATA_FILE, "[]", "utf-8");
-  }
-}
-
 export async function readApplications(): Promise<Application[]> {
-  await ensureFile();
-  const raw = await fs.readFile(DATA_FILE, "utf-8");
   try {
+    const result = await get(PATHNAME, { access: "private" });
+    if (!result || result.statusCode !== 200) return [];
+    const raw = await new Response(result.stream).text();
     const parsed = JSON.parse(raw);
     return Array.isArray(parsed) ? parsed : [];
   } catch {
@@ -29,8 +19,11 @@ export async function readApplications(): Promise<Application[]> {
 }
 
 async function writeApplications(apps: Application[]): Promise<void> {
-  await ensureFile();
-  await fs.writeFile(DATA_FILE, JSON.stringify(apps, null, 2), "utf-8");
+  await put(PATHNAME, JSON.stringify(apps, null, 2), {
+    access: "private",
+    contentType: "application/json",
+    allowOverwrite: true,
+  });
 }
 
 function withWriteLock<T>(fn: () => Promise<T>): Promise<T> {
