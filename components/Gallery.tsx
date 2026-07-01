@@ -1,6 +1,12 @@
 import Image from "next/image";
 
 const ITEMS = [
+  { src: "/images/bed-open-door.jpg", title: "Спальное место у леса" },
+  { src: "/images/interior-forest-view.jpg", title: "Вид из окна" },
+  { src: "/images/open-kitchen-outdoor.jpg", title: "Кухонный модуль" },
+  { src: "/images/kitchen-drawers.jpg", title: "Кухонные ящики" },
+  { src: "/images/utility-niche.jpg", title: "Ниша: бак, АКБ, мойка" },
+  { src: "/images/solar-panel.jpg", title: "Солнечная панель" },
   { src: "/images/interior.jpg", title: "Интерьер" },
   { src: "/images/kitchen-wood.jpg", title: "Кухня" },
   { src: "/images/sink.jpg", title: "Мойка" },

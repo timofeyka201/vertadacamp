@@ -23,6 +23,16 @@ export default function Catalog() {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
+
+        <div className="mx-auto mt-10 max-w-3xl rounded-xl2 border border-forest/15 bg-forest/5 p-6 text-center">
+          <p className="font-heading text-sm font-bold uppercase tracking-wide text-forest-dark">
+            Есть дополнительные опции
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-graphite/70">
+            К любой комплектации можно добавить отопление, душ, туалет,
+            покраску в свой цвет и другие доработки — обсудим при заказе.
+          </p>
+        </div>
       </div>
     </section>
   );
