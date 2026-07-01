@@ -21,14 +21,15 @@ export default function Hero() {
 
       <div className="container-x relative z-10 pb-16 pt-40 md:pb-24">
         <p className="mb-4 inline-block rounded-full border border-gold/60 bg-graphite/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold backdrop-blur-sm">
-          Производство кэмперов-прицепов
+          Завод-производитель в Йошкар-Оле
         </p>
         <h1 className="max-w-3xl font-heading text-4xl font-bold uppercase leading-[1.05] tracking-tight text-cream sm:text-5xl md:text-6xl">
           VertadaCamp. <span className="text-gold">Твоя свобода</span> путешествовать.
         </h1>
         <p className="mt-5 max-w-xl text-base text-cream/85 sm:text-lg">
-          Кэмперы-прицепы, которые превращают дорогу в дом, а каждую остановку —
-          в любимое место.
+          Кэмперы-прицепы от производителя — делаем в Республике Марий Эл и
+          отправляем по всему Приволжскому федеральному округу и России.
+          Превращаем дорогу в дом, а каждую остановку — в любимое место.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-4">
