@@ -44,6 +44,10 @@ body {
   }
 }
 
+summary::-webkit-details-marker {
+  display: none;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

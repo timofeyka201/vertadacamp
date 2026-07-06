@@ -16,6 +16,10 @@ export default function Catalog() {
             Выберите уровень автономности и комфорта под свой формат
             путешествий.
           </p>
+          <p className="mx-auto mt-2 max-w-xl text-sm text-graphite/60">
+            Каждый прицеп-кэмпер VertadaCamp — это готовый автодом под ключ:
+            забираете с завода и сразу едете в путешествие.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 gap-7 md:grid-cols-3">

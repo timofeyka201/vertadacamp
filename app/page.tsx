@@ -7,12 +7,14 @@ import Catalog from "@/components/Catalog";
 import Gallery from "@/components/Gallery";
 import UseCases from "@/components/UseCases";
 import Testimonials from "@/components/Testimonials";
+import FAQ from "@/components/FAQ";
 import FinalCta from "@/components/FinalCta";
 import Footer from "@/components/Footer";
 import OrderModal from "@/components/OrderModal";
 import ProductDetailModal from "@/components/ProductDetailModal";
 import VideoModal from "@/components/VideoModal";
 import { PRODUCTS } from "@/lib/products";
+import { FAQ_ITEMS } from "@/lib/faq";
 
 const SITE_URL = "https://vertadacamp.ru";
 
@@ -76,9 +78,21 @@ function structuredData() {
     },
   }));
 
+  const faqPage = {
+    "@type": "FAQPage",
+    mainEntity: FAQ_ITEMS.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return {
     "@context": "https://schema.org",
-    "@graph": [organization, ...products],
+    "@graph": [organization, ...products, faqPage],
   };
 }
 
@@ -99,6 +113,7 @@ export default function Home() {
         <Gallery />
         <UseCases />
         <Testimonials />
+        <FAQ />
         <FinalCta />
       </main>
       <Footer />

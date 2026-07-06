@@ -51,6 +51,11 @@ export default function About() {
               дилерских наценок. Отгружаем по всему Приволжскому федеральному
               округу и России.
             </p>
+            <p className="mt-4 text-base leading-relaxed text-graphite/80 sm:text-lg">
+              Прицеп-кэмпер VertadaCamp — это компактный прицеп-автодом: не нужны
+              права на дом на колёсах, лёгкая буксировка обычным авто и полная
+              автономность на маршруте.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
