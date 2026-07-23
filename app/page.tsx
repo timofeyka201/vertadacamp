@@ -36,7 +36,7 @@ function structuredData() {
     name: "VertadaCamp",
     legalName: 'ООО «Вертада»',
     description:
-      "Завод-производитель кэмперов-прицепов в Йошкар-Оле. Продажа напрямую, без посредников, доставка по Республике Марий Эл, Приволжскому федеральному округу и всей России.",
+      "Завод-производитель автодомов-прицепов (кэмперов) в Йошкар-Оле. Продажа напрямую, без посредников, доставка по Республике Марий Эл, Приволжскому федеральному округу и всей России.",
     url: SITE_URL,
     logo: `${SITE_URL}/images/logo.png`,
     image: `${SITE_URL}/images/hero.jpg`,
@@ -62,7 +62,7 @@ function structuredData() {
 
   const products = PRODUCTS.map((product) => ({
     "@type": "Product",
-    name: `Кэмпер-прицеп VertadaCamp ${product.name}`,
+    name: `Автодом-прицеп (кэмпер) VertadaCamp ${product.name}`,
     description: product.tagline,
     image: `${SITE_URL}${product.image}`,
     brand: { "@type": "Brand", name: "VertadaCamp" },

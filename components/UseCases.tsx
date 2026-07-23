@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const CASES = [
   {
-    src: "/images/camp-base.jpg",
+    src: "/images/lake-weekend.jpg",
     title: "Уикенд у озера",
     text: "Сорвались в пятницу вечером — к закату уже разожгли костёр у воды.",
   },
