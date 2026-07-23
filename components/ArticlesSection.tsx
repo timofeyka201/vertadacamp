@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { ARTICLES } from "@/lib/articles";
+import { getArticlesSorted } from "@/lib/articles";
 import ArticleCard from "./ArticleCard";
 
 export default function ArticlesSection() {
-  const latest = ARTICLES.slice(0, 3);
+  const latest = getArticlesSorted().slice(0, 3);
 
   return (
     <section id="articles" className="section-pad bg-cream">
@@ -17,7 +17,7 @@ export default function ArticlesSection() {
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base text-graphite/70">
             Разбираем частые вопросы про права, оформление, автономность и
-            выбор комплектации — без воды, по делу.
+            выбор автодома-прицепа — без воды, по делу.
           </p>
         </div>
 

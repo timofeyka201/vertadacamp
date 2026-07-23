@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ARTICLES } from "@/lib/articles";
+import { getArticlesSorted } from "@/lib/articles";
 import ArticleCard from "@/components/ArticleCard";
 
 const SITE_URL = "https://vertadacamp.ru";
@@ -7,7 +7,7 @@ const SITE_URL = "https://vertadacamp.ru";
 export const metadata: Metadata = {
   title: "Блог о кэмперах и автодомах-прицепах | VertadaCamp",
   description:
-    "Статьи о кэмперах-прицепах и автодомах: права на буксировку, выбор комплектации, автономность, оформление в ГИБДД. Полезные материалы от производителя VertadaCamp.",
+    "Статьи о кэмперах-прицепах и автодомах: права на буксировку, выбор автодома-прицепа, автономность, оформление в ГИБДД. Полезные материалы от производителя VertadaCamp.",
   alternates: {
     canonical: `${SITE_URL}/blog`,
   },
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     url: `${SITE_URL}/blog`,
     title: "Блог о кэмперах и автодомах-прицепах | VertadaCamp",
     description:
-      "Статьи о кэмперах-прицепах и автодомах: права на буксировку, выбор комплектации, автономность, оформление в ГИБДД.",
+      "Статьи о кэмперах-прицепах и автодомах: права на буксировку, выбор автодома-прицепа, автономность, оформление в ГИБДД.",
   },
 };
 
@@ -33,12 +33,12 @@ export default function BlogIndexPage() {
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-base text-graphite/70">
             Разбираем частые вопросы про права, оформление, автономность и
-            выбор комплектации кэмпера-прицепа — без воды, по делу.
+            выбор автодома-прицепа — без воды, по делу.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {ARTICLES.map((article) => (
+          {getArticlesSorted().map((article) => (
             <ArticleCard key={article.slug} article={article} />
           ))}
         </div>
