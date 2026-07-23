@@ -33,7 +33,7 @@ export default function Hero() {
           любимое место.
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-4">
+        <div className="mt-8 flex flex-wrap items-center gap-4">
           <button
             onClick={() => openOrder()}
             className="rounded-full bg-coral px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-cream shadow-soft transition hover:brightness-110 active:scale-95"
