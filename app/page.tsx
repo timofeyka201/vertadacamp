@@ -7,6 +7,7 @@ import Catalog from "@/components/Catalog";
 import Gallery from "@/components/Gallery";
 import UseCases from "@/components/UseCases";
 import Testimonials from "@/components/Testimonials";
+import ArticlesSection from "@/components/ArticlesSection";
 import FAQ from "@/components/FAQ";
 import FinalCta from "@/components/FinalCta";
 import Footer from "@/components/Footer";
@@ -15,6 +16,7 @@ import ProductDetailModal from "@/components/ProductDetailModal";
 import VideoModal from "@/components/VideoModal";
 import { PRODUCTS } from "@/lib/products";
 import { FAQ_ITEMS } from "@/lib/faq";
+import { ARTICLES } from "@/lib/articles";
 
 const SITE_URL = "https://vertadacamp.ru";
 
@@ -90,9 +92,21 @@ function structuredData() {
     })),
   };
 
+  const articles = ARTICLES.map((article) => ({
+    "@type": "BlogPosting",
+    "@id": `${SITE_URL}/blog/${article.slug}#article`,
+    headline: article.title,
+    description: article.metaDescription,
+    image: `${SITE_URL}${article.coverImage}`,
+    datePublished: article.publishedAt,
+    url: `${SITE_URL}/blog/${article.slug}`,
+    author: { "@id": `${SITE_URL}/#organization` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+  }));
+
   return {
     "@context": "https://schema.org",
-    "@graph": [organization, ...products, faqPage],
+    "@graph": [organization, ...products, faqPage, ...articles],
   };
 }
 
@@ -113,6 +127,7 @@ export default function Home() {
         <Gallery />
         <UseCases />
         <Testimonials />
+        <ArticlesSection />
         <FAQ />
         <FinalCta />
       </main>

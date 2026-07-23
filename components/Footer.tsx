@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const NAV = [
-  { href: "#hero", label: "Главная" },
-  { href: "#about", label: "О компании" },
-  { href: "#catalog", label: "Продукты" },
-  { href: "#contacts", label: "Контакты" },
+  { href: "/#hero", label: "Главная" },
+  { href: "/#about", label: "О компании" },
+  { href: "/#catalog", label: "Продукты" },
+  { href: "/blog", label: "Блог" },
+  { href: "/#contacts", label: "Контакты" },
 ];
 
 export default function Footer() {

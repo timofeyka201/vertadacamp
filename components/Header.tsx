@@ -1,33 +1,40 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSite } from "./SiteContext";
 
 const NAV = [
-  { href: "#hero", label: "Главная" },
-  { href: "#about", label: "О компании" },
-  { href: "#catalog", label: "Продукты" },
-  { href: "#faq", label: "Вопросы" },
-  { href: "#contacts", label: "Контакты" },
+  { href: "/#hero", label: "Главная" },
+  { href: "/#about", label: "О компании" },
+  { href: "/#catalog", label: "Продукты" },
+  { href: "/blog", label: "Блог" },
+  { href: "/#faq", label: "Вопросы" },
+  { href: "/#contacts", label: "Контакты" },
 ];
 
 export default function Header() {
   const { openOrder } = useSite();
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
+    if (!isHome) return;
     const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isHome]);
+
+  const solid = !isHome || scrolled;
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-        scrolled ? "bg-cream/95 shadow-card backdrop-blur" : "bg-transparent"
+        solid ? "bg-cream/95 shadow-card backdrop-blur" : "bg-transparent"
       }`}
     >
       <div className="container-x flex h-16 items-center justify-between md:h-20">
@@ -37,7 +44,7 @@ export default function Header() {
               key={item.href}
               href={item.href}
               className={`text-sm font-semibold uppercase tracking-wide transition-colors hover:text-coral ${
-                scrolled ? "text-graphite" : "text-cream"
+                solid ? "text-graphite" : "text-cream"
               }`}
             >
               {item.label}
@@ -51,12 +58,12 @@ export default function Header() {
           aria-label="Меню"
         >
           <span
-            className={`block h-0.5 w-6 ${scrolled ? "bg-graphite" : "bg-cream"}`}
+            className={`block h-0.5 w-6 ${solid ? "bg-graphite" : "bg-cream"}`}
           />
         </button>
 
         <div className="flex items-center gap-3">
-          <a href="#hero" className="flex items-center gap-2">
+          <a href="/#hero" className="flex items-center gap-2">
             <Image
               src="/images/logo.png"
               alt="VertadaCamp"
@@ -66,7 +73,7 @@ export default function Header() {
             />
             <span
               className={`font-heading text-lg font-semibold tracking-tight md:text-xl ${
-                scrolled ? "text-forest-dark" : "text-cream"
+                solid ? "text-forest-dark" : "text-cream"
               }`}
             >
               VertadaCamp
