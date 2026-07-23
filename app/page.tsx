@@ -44,7 +44,7 @@ function structuredData() {
     image: `${SITE_URL}/images/hero.jpg`,
     email: "Maf@vertada.ru",
     telephone: "+79276847252",
-    priceRange: "от 450 000 ₽",
+    priceRange: "от 350 000 ₽",
     address: {
       "@type": "PostalAddress",
       streetAddress: "ул. Машиностроителей, д. 72, корпус литер В, офис 1",

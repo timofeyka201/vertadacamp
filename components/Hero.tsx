@@ -34,9 +34,15 @@ export default function Hero() {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-4">
+          <button
+            onClick={() => openOrder()}
+            className="rounded-full bg-coral px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-cream shadow-soft transition hover:brightness-110 active:scale-95"
+          >
+            Оставить заявку
+          </button>
           <a
             href="#catalog"
-            className="rounded-full bg-coral px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-cream shadow-soft transition hover:brightness-110 active:scale-95"
+            className="rounded-full border border-cream/40 bg-cream/10 px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-cream backdrop-blur-sm transition hover:bg-cream/20"
           >
             Смотреть модели
           </a>

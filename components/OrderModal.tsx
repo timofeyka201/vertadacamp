@@ -5,6 +5,7 @@ import Modal from "./Modal";
 import { useSite } from "./SiteContext";
 import { MODEL_LABELS } from "@/lib/types";
 import type { CamperModel } from "@/lib/types";
+import { reachGoal } from "@/lib/metrika";
 
 const MODEL_OPTIONS: (CamperModel | "")[] = ["", "econom", "base", "comfort"];
 
@@ -67,6 +68,7 @@ export default function OrderModal() {
         throw new Error(data.error || "Не удалось отправить заявку");
       }
       setSuccess(true);
+      reachGoal("lead_submit");
     } catch (err) {
       setSubmitError(
         err instanceof Error ? err.message : "Не удалось отправить заявку"

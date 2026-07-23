@@ -72,7 +72,7 @@ export default function Header() {
               className="h-9 w-9 rounded-full object-cover md:h-11 md:w-11"
             />
             <span
-              className={`font-heading text-lg font-semibold tracking-tight md:text-xl ${
+              className={`hidden font-heading text-lg font-semibold tracking-tight sm:inline md:text-xl ${
                 solid ? "text-forest-dark" : "text-cream"
               }`}
             >
@@ -81,7 +81,7 @@ export default function Header() {
           </a>
           <button
             onClick={() => openOrder()}
-            className="hidden rounded-full bg-coral px-5 py-2.5 text-sm font-semibold text-cream shadow-card transition hover:brightness-110 active:scale-95 sm:inline-block"
+            className="inline-flex items-center whitespace-nowrap rounded-full bg-coral px-3.5 py-2 text-xs font-semibold text-cream shadow-card transition hover:brightness-110 active:scale-95 sm:px-5 sm:py-2.5 sm:text-sm"
           >
             Оставить заявку
           </button>

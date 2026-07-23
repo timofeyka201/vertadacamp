@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Oswald, Manrope } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-
-const YANDEX_METRIKA_ID = 110307995;
+import { YANDEX_METRIKA_ID } from "@/lib/metrika";
 
 const heading = Oswald({
   subsets: ["latin", "cyrillic"],
